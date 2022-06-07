@@ -3,6 +3,13 @@ const app = express();
 const PORT = 5001;
 const mongoose = require('mongoose');
 const cors = require('cors');
+const cloudinary = require("cloudinary").v2;
+
+cloudinary.config({ 
+    cloud_name: 'ceciliadev', 
+    api_key: '748531396169686', 
+    api_secret: 't-Jbpds3vKoY4FpC1YJkd3VNJ_Q' 
+  });
 
 const CartRoutes = require('./routes/cart');
 const ProductRoutes = require('./routes/products');

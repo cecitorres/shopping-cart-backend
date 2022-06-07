@@ -1,3 +1,5 @@
+const cloudinary = require("cloudinary").v2;
+
 const Product = require('../models/product');
 
 const getProducts = async (req, res) => {
@@ -19,8 +21,12 @@ const getProducts = async (req, res) => {
 const createProduct = async (req, res) => {
     try {
         const body = req.body;
+        // Call to Cloudinary to upload image
+        const upload = await cloudinary.uploader.upload(body.image);
+        // Create a new product
         const product = new Product({
-            ...body
+            ...body,
+            image: upload.url
         });
 
         const data = await product.save();
@@ -30,6 +36,7 @@ const createProduct = async (req, res) => {
             data
         })
     } catch (error) {
+        console.log(error);
         return res.status(500).json({
             message: "There was an error!",
             error
