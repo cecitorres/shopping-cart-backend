@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 
 const CartRoutes = require('./routes/cart');
+const ProductRoutes = require('./routes/products');
 // const UserRoutes = require('./routes/user');
 
 require('dotenv').config();
@@ -26,6 +27,7 @@ mongoose.connect(mongoURL, (error) => {
 })
 
 app.use('/api/v1/cart', CartRoutes);
+app.use('/api/v1/products', ProductRoutes);
 // app.use('/api/v1/users', UserRoutes);
 
 app.listen(PORT, (req, res) => {
