@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { getCart, createCart, getCartById, updateCart } = require('../controller/cart');
+const { getCart, createCart, getCartById, updateCart, validateCoupon } = require('../controller/cart');
 
 router.get('/', getCart);
 
@@ -10,6 +10,6 @@ router.post('/', createCart);
 
 router.put('/:id', updateCart);
 
-// router.delete('/:id', deleteTodo);
+router.post('/coupon', validateCoupon);
 
 module.exports = router;

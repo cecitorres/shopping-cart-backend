@@ -42,13 +42,15 @@ const getCartById = async (req, res) => {
     const id = req.params.id;
 
     try {
-        const data = await Cart.findOne({ _id: id});
+        const data = await Cart.findOne({
+            _id: id
+        });
 
         return res.status(200).json({
             message: "Successfully fetched cart based on ID",
             data
         })
-    } catch(error) {
+    } catch (error) {
         return res.status(500).json({
             message: "There was an error!",
             error
@@ -80,9 +82,37 @@ const updateCart = async (req, res) => {
     }
 }
 
+const validateCoupon = async (req, res) => {
+    const body = req.body;
+    console.log(body,444);
+    try {
+        // Add validation for coupon here
+        if (true) {
+            const data = await Cart.findOneAndUpdate({
+                _id: body.cartId
+            }, {
+                coupon: body.coupon
+            }, {
+                new: true,
+                runValidators: true
+            });
+            return res.status(200).json({
+                message: "Successfully coupon applied",
+                data
+            })
+        }
+    } catch (error) {
+        return res.status(500).json({
+            message: "There was an error!",
+            error
+        })
+    }
+}
+
 module.exports = {
     getCart,
     createCart,
     getCartById,
-    updateCart
+    updateCart,
+    validateCoupon
 }
